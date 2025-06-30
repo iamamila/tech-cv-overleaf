@@ -1,4 +1,4 @@
-# 🧾 LaTeX CV Template for IT Professionals
+# LaTeX CV Template for IT Professionals
 
 This is a clean and modern LaTeX resume (CV) template, designed especially for **Linux/Unix system engineers**, **DevOps professionals**, and **IT infrastructure specialists**.
 
