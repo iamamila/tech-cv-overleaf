@@ -1,0 +1,192 @@
+%----------------------------------------------------
+% Clean LaTeX Resume Template for IT Professionals
+% Based on a real example; shared to help others.
+% Author: Open Source Contributor
+% License: MIT
+%----------------------------------------------------
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{ifxetex}
+
+\ifxetex
+  \usepackage{fontspec}
+  \usepackage[xetex]{hyperref}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[pdftex]{hyperref}
+\fi
+
+\usepackage{fontawesome}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+%-------------------------------------------------- SETTINGS --------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\def \fullname {John Doe}
+\def \subtitle {Linux & Infrastructure Engineer}
+
+\def \linkedinicon {\faLinkedin}
+\def \linkedinlink {https://linkedin.com/in/johndoe}
+\def \linkedintext {/johndoe}
+
+\def \phoneicon {\faPhone}
+\def \phonetext {+61 400 000 000}
+
+\def \emailicon {\faEnvelope}
+\def \emaillink {mailto:john.doe@example.com}
+\def \emailtext {john.doe@example.com}
+
+\def \locationicon {\faMapMarker}
+\def \locationtext {Melbourne, Australia}
+
+% Colors
+\definecolor{primary}{HTML}{000000}
+\definecolor{secondary}{HTML}{0D47A1}
+\definecolor{accent}{HTML}{263238}
+\definecolor{links}{HTML}{1565C0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=links,
+}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\def \entryspacing {0pt}
+\def \bulletstyle {\faAngleRight}
+
+% Resume Components
+\newcommand{\section}[2]{\vspace{5pt}
+  \colorbox{secondary}{\color{white}\normalsize\textbf{{#1}{\hspace{7pt}#2}}}
+}
+
+\newcommand{\resumeEntryStart}{\begin{itemize}[leftmargin=2.5mm]}
+\newcommand{\resumeEntryEnd}{\end{itemize}\vspace{\entryspacing}}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=4.5mm]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+\renewcommand{\labelitemii}{\bulletstyle}
+\newcommand{\resumeItem}[1]{\item\small{{#1 \vspace{-2pt}}}}
+
+\newcommand{\resumeEntryTSDL}[4]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\small\color{accent}#2} \\
+      \textit{\small\color{accent}#3} & \textit{\small\color{accent}#4} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+\newcommand{\resumeEntryS}[2]{
+  \item[]\small{
+    \textbf{\color{primary}#1 }{ #2 \vspace{-6pt}}
+  }
+}
+
+\newcommand{\singlecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[b]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}\textbf{\fullname}} \\
+        {\textit{\subtitle}}
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l}
+        {\small#1} \\
+        {\small#2} \\
+        {\small#3} \\
+        {\small#4} \\
+        {\small#5} \\
+        {\small#6}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+\begin{document}
+
+%----------------------------- HEADER -------------------------------
+\singlecol{\linkedin}{\phone}{\email}{\locationtext}{}{}
+
+%----------------------------- OBJECTIVE ----------------------------
+\section{\faRoad}{Objective}
+
+\vspace{0.5em}
+Certified Unix/Linux Engineer with 8+ years of experience in IT infrastructure, automation (Shell, Ansible), cloud technologies (AWS), and incident/change management. Proficient in tools like ServiceNow, Nagios, and NetBackup. Looking to contribute to high-performing DevOps or systems teams.
+
+%----------------------------- SKILLS -------------------------------
+\section{\faGears}{Skills}
+
+\resumeEntryStart
+  \resumeEntryS{Operating Systems: }{Red Hat, Ubuntu, Solaris, AIX, Windows}
+  \resumeEntryS{Scripting & Automation: }{Shell, Ansible, Python}
+  \resumeEntryS{Monitoring & Logging: }{Nagios, ELK, Wazuh, PRTG}
+  \resumeEntryS{ITSM & Backup: }{ServiceNow, BladeLogic, Moogsoft, NetBackup}
+  \resumeEntryS{Cloud: }{AWS (EC2, VPC, S3)}
+  \resumeEntryS{Databases: }{MySQL, PostgreSQL, Oracle}
+\resumeEntryEnd
+
+%----------------------------- EXPERIENCE ---------------------------
+\section{\faPieChart}{Experience}
+
+\resumeEntryStart
+  \resumeEntryTSDL{Global Finance Co.}{Aug 2020 – Mar 2024}{Unix Support Engineer}{Remote / Sri Lanka}
+  \resumeItemListStart
+    \resumeItem{Installed and maintained RHEL and Solaris systems in production.}
+    \resumeItem{Automated patching and admin tasks using Shell and Ansible.}
+    \resumeItem{Handled incidents and change requests using ServiceNow.}
+    \resumeItem{Monitored system health via Nagios and improved uptime KPIs.}
+    \resumeItem{Collaborated with global teams to deploy and secure AWS infrastructure.}
+  \resumeItemListEnd
+\resumeEntryEnd
+
+\resumeEntryStart
+  \resumeEntryTSDL{Telecom Solutions Ltd.}{Aug 2018 – Jul 2020}{Associate System Engineer}{Colombo, Sri Lanka}
+  \resumeItemListStart
+    \resumeItem{Managed HAProxy load balancing and MySQL replication.}
+    \resumeItem{Implemented monitoring with Nagios, Observium, and Pandora FMS.}
+    \resumeItem{Revamped SMS gateway, improving delivery speed and reliability.}
+    \resumeItem{Configured and secured PostgreSQL and Oracle databases.}
+  \resumeItemListEnd
+\resumeEntryEnd
+
+%----------------------------- CERTIFICATIONS -----------------------
+\section{\faBookmark}{Certifications}
+
+\resumeEntryStart
+  \resumeEntryS{RHCE: }{Red Hat Certified Engineer (RHEL 7/9)}
+  \resumeEntryS{RHCSA: }{Red Hat Certified System Administrator}
+\resumeEntryEnd
+
+%----------------------------- EDUCATION ----------------------------
+\section{\faGraduationCap}{Education}
+
+\resumeEntryStart
+  \resumeEntryTSDL{University of Applied Sciences}{2014 – 2018}{BSc in Applied Sciences (Computer Science)}{}
+\resumeEntryEnd
+
+%----------------------------- REFERENCES ---------------------------
+\section{\faLink}{References}
+
+\resumeEntryStart
+  \resumeItemListStart
+    \resumeItem{Available upon request.}
+  \resumeItemListEnd
+\resumeEntryEnd
+
+\end{document}
