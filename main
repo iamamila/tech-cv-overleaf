@@ -1,17 +1,16 @@
-%----------------------------------------------------
-% Clean LaTeX Resume Template for IT Professionals
-% Based on a real example; shared to help others.
-% Author: Open Source Contributor
-% License: MIT
-%----------------------------------------------------
+%-------------------------------------
+% LaTeX Resume for Software Engineers
+% Author : Leslie Cheng
+% License : MIT
+%-------------------------------------
 
 \documentclass[a4paper,12pt]{article}
 
 \usepackage[empty]{fullpage}
 \usepackage{enumitem}
 \usepackage{float}
-\usepackage{ifxetex}
 
+\usepackage{ifxetex}
 \ifxetex
   \usepackage{fontspec}
   \usepackage[xetex]{hyperref}
@@ -20,90 +19,164 @@
   \usepackage[T1]{fontenc}
   \usepackage[pdftex]{hyperref}
 \fi
-
 \usepackage{fontawesome}
 \usepackage[sfdefault,light]{FiraSans}
+\usepackage{anyfontsize}
 \usepackage{xcolor}
 \usepackage{tabularx}
+
+
+% Add page numbering
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 
-%-------------------------------------------------- SETTINGS --------------------------------------------------
+% Override the empty page style from fullpage
 \pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[L]{Page \thepage\ of \pageref{LastPage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\fancyhf{} % clear all headers and footers
+\fancyfoot[L]{Page \thepage\ of \pageref{LastPage}} % centered footer
+\renewcommand{\headrulewidth}{0pt} % remove header line
+\renewcommand{\footrulewidth}{0pt} % no footer line
 
-\def \fullname {John Doe}
-\def \subtitle {Linux & Infrastructure Engineer}
+
+%-------------------------------------------------- SETTINGS HERE --------------------------------------------------
+% Header settings
+%l Details Here
+\def \fullname {your fullname}
+
 
 \def \linkedinicon {\faLinkedin}
-\def \linkedinlink {https://linkedin.com/in/johndoe}
-\def \linkedintext {/johndoe}
+\def \linkedinlink {https://linkedin.com/in/link/}
+\def \linkedintext {/link}
 
 \def \phoneicon {\faPhone}
-\def \phonetext {+61 400 000 000}
+\def \phonetext {+61 000 000 000}
 
 \def \emailicon {\faEnvelope}
-\def \emaillink {mailto:john.doe@example.com}
-\def \emailtext {john.doe@example.com}
+\def \emaillink {mailto:youremail@gmail.com}
+\def \emailtext {youremail@gmail.com}
 
-\def \locationicon {\faMapMarker}
-\def \locationtext {Melbourne, Australia}
 
-% Colors
+
+\def \githubicon {\faPencil}
+%\def \githublink {https://github.com/dwight-schrute}
+\def \githubtext {youraddress}
+
+% \def \websiteicon {\faGlobe}
+% \def \websitelink {https://google.com/}
+% \def \websitetext {dwightschrute.com}
+
+\def \headertype {\singlecol} % \singlecol or \doublecol
+
+% Misc settings
+\def \entryspacing {-0pt}
+
+\def \bulletstyle {\faAngleRight}
+
+% Define colours
 \definecolor{primary}{HTML}{000000}
 \definecolor{secondary}{HTML}{0D47A1}
 \definecolor{accent}{HTML}{263238}
 \definecolor{links}{HTML}{1565C0}
 
+%------------------------------------------------------------------------------------------------------------------- 
+
+% Defines to make listing easier
+\def \linkedin {\linkedinicon \hspace{3pt}\href{\linkedinlink}{\linkedintext}}
+\def \phone {\phoneicon \hspace{3pt}{ \phonetext}}
+\def \email {\emailicon \hspace{3pt}\href{\emaillink}{\emailtext}}
+\def \github {\githubicon \hspace{3pt}\githubtext}
+\def \website {\websiteicon \hspace{3pt}\href{\websitelink}{\websitetext}
+}
+
+\usepackage[a4paper,top=1.2cm,bottom=1cm,left=1.2cm,right=1.2cm]{geometry}
+
+
+% Define the link colours
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
+%    citecolor=black
     urlcolor=links,
 }
 
+% Set the margin alignment 
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
-\def \entryspacing {0pt}
-\def \bulletstyle {\faAngleRight}
 
-% Resume Components
-\newcommand{\section}[2]{\vspace{5pt}
-  \colorbox{secondary}{\color{white}\normalsize\textbf{{#1}{\hspace{7pt}#2}}}
+%-------------------------
+% Custom commands
+
+% Sections
+\renewcommand{\section}[2]{\vspace{5pt}
+  \colorbox{secondary}{\color{white}\raggedbottom\normalsize\textbf{{#1}{\hspace{7pt}#2}}}
 }
 
+% Entry start and end, for spacing
 \newcommand{\resumeEntryStart}{\begin{itemize}[leftmargin=2.5mm]}
 \newcommand{\resumeEntryEnd}{\end{itemize}\vspace{\entryspacing}}
 
+% Itemized list for the bullet points under an entry, if necessary
 \newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=4.5mm]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
+% Resume item
 \renewcommand{\labelitemii}{\bulletstyle}
-\newcommand{\resumeItem}[1]{\item\small{{#1 \vspace{-2pt}}}}
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
 
+% Entry with title, subheading, date(s), and location
 \newcommand{\resumeEntryTSDL}[4]{
   \vspace{-1pt}\item[]
     \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
-      \textbf{\color{primary}#1} & {\small\color{accent}#2} \\
-      \textit{\small\color{accent}#3} & \textit{\small\color{accent}#4} \\
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+      \textit{\color{accent}\small#3} & \textit{\color{accent}\small#4} \\
     \end{tabularx}\vspace{-6pt}
 }
 
+% Entry with title and date(s)
+\newcommand{\resumeEntryTD}[2]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+% Entry for special (skills)
 \newcommand{\resumeEntryS}[2]{
   \item[]\small{
     \textbf{\color{primary}#1 }{ #2 \vspace{-6pt}}
   }
 }
 
+% Double column header
+\newcommand{\doublecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[c]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        { \textit{\subtitle}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l@{\hspace{1.5em}}l}
+        {\small#4} & {\small#1} \\
+        {\small#5} & {\small#2} \\
+        {\small#6} & {\small#3}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% Single column header
 \newcommand{\singlecol}[6]{
   \begin{tabularx}{\textwidth}{Xr}
     {
       \begin{tabular}[b]{l}
-        \fontsize{35}{45}\selectfont{\color{primary}\textbf{\fullname}} \\
-        {\textit{\subtitle}}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        {\textit{\subtitle}} % You could add a subtitle here
       \end{tabular}
     } & {
       \begin{tabular}[c]{l}
@@ -119,74 +192,136 @@
 }
 
 \begin{document}
+%-------------------------------------------------- BEGIN HERE --------------------------------------------------
 
-%----------------------------- HEADER -------------------------------
-\singlecol{\linkedin}{\phone}{\email}{\locationtext}{}{}
+%---------------------------------------------------- HEADER ----------------------------------------------------
 
-%----------------------------- OBJECTIVE ----------------------------
-\section{\faRoad}{Objective}
+\headertype{\linkedin}{\phone}{\email}{\github}{}{} % Set the order of items here
+\vspace{-5pt} % Set a negative value to push the body up, and the opposite
+
+\vspace{-1em}
+%%objective%%
+
+\section{\faRoad}{Objectives}
 
 \vspace{0.5em}
-Certified Unix/Linux Engineer with 8+ years of experience in IT infrastructure, automation (Shell, Ansible), cloud technologies (AWS), and incident/change management. Proficient in tools like ServiceNow, Nagios, and NetBackup. Looking to contribute to high-performing DevOps or systems teams.
 
-%----------------------------- SKILLS -------------------------------
+Insert your objectives in here
+
+\vspace{0.5em}
+
+%-------------------------------------------------- SKILLS --------------------------------------------------
 \section{\faGears}{Skills}
+ \resumeEntryStart
+  \resumeEntryS{Operating Systems: } {RedHat 6,7,8 /Sol10/Sol11, Ubuntu 14,16,18, AIX, Windows 7,8,10,11}
+  \resumeEntryS{Automation \& Scripting: } {Ansible, Shell,
+Python}
+\resumeEntryS{Monitoring \& Logging: } {Nagios, PRTG, ELK,
+Wazuh}
+\resumeEntryS{IT Support Tools: } {ServiceNow, Remedy, NetBackup, Confluence, BladeLogic, VeritasCluster, Moogsoft, Control-M}
+\resumeEntryS{Databases: } {Oracle DB, PostgreSQL, MySQL}
+\resumeEntryS{Firewall: } {Squid, Pfsense}
+\resumeEntryS{Email \& Collaboration: } {Microsoft O365}
 
-\resumeEntryStart
-  \resumeEntryS{Operating Systems: }{Red Hat, Ubuntu, Solaris, AIX, Windows}
-  \resumeEntryS{Scripting & Automation: }{Shell, Ansible, Python}
-  \resumeEntryS{Monitoring & Logging: }{Nagios, ELK, Wazuh, PRTG}
-  \resumeEntryS{ITSM & Backup: }{ServiceNow, BladeLogic, Moogsoft, NetBackup}
-  \resumeEntryS{Cloud: }{AWS (EC2, VPC, S3)}
-  \resumeEntryS{Databases: }{MySQL, PostgreSQL, Oracle}
-\resumeEntryEnd
-
-%----------------------------- EXPERIENCE ---------------------------
+ \resumeEntryEnd
+ 
+%-------------------------------------------------- EXPERIENCE--------------------------------------------------
 \section{\faPieChart}{Experience}
 
-\resumeEntryStart
-  \resumeEntryTSDL{Global Finance Co.}{Aug 2020 – Mar 2024}{Unix Support Engineer}{Remote / Sri Lanka}
-  \resumeItemListStart
-    \resumeItem{Installed and maintained RHEL and Solaris systems in production.}
-    \resumeItem{Automated patching and admin tasks using Shell and Ansible.}
-    \resumeItem{Handled incidents and change requests using ServiceNow.}
-    \resumeItem{Monitored system health via Nagios and improved uptime KPIs.}
-    \resumeItem{Collaborated with global teams to deploy and secure AWS infrastructure.}
-  \resumeItemListEnd
-\resumeEntryEnd
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {Company 1}{Aug 2020 -- Mar 2024}
+      {Designation}{Colombo, Sri Lanka}
+    \resumeItemListStart %responsibilities list
+      \resumeItem {responsibility 1}
+      \resumeItem {responsibility 2}
+      \resumeItem {responsibility 3}
+      \resumeItem {responsibility 4}
+      \resumeItem {responsibility 5}
+      \resumeItem {responsibility n}
 
-\resumeEntryStart
-  \resumeEntryTSDL{Telecom Solutions Ltd.}{Aug 2018 – Jul 2020}{Associate System Engineer}{Colombo, Sri Lanka}
-  \resumeItemListStart
-    \resumeItem{Managed HAProxy load balancing and MySQL replication.}
-    \resumeItem{Implemented monitoring with Nagios, Observium, and Pandora FMS.}
-    \resumeItem{Revamped SMS gateway, improving delivery speed and reliability.}
-    \resumeItem{Configured and secured PostgreSQL and Oracle databases.}
-  \resumeItemListEnd
-\resumeEntryEnd
+    \resumeItemListEnd
+  \resumeEntryEnd
+\newpage
 
-%----------------------------- CERTIFICATIONS -----------------------
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {Company 2}{Aug 2020 -- Mar 2024}
+      {Designation}{Colombo, Sri Lanka}
+    \resumeItemListStart %responsibilities list
+      \resumeItem {responsibility 1}
+      \resumeItem {responsibility 2}
+      \resumeItem {responsibility 3}
+      \resumeItem {responsibility 4}
+      \resumeItem {responsibility 5}
+      \resumeItem {responsibility n}
+
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+    \resumeEntryStart
+    \resumeEntryTSDL
+      {Company 3}{Aug 2020 -- Mar 2024}
+      {Designation}{Colombo, Sri Lanka}
+    \resumeItemListStart %responsibilities list
+      \resumeItem {responsibility 1}
+      \resumeItem {responsibility 2}
+      \resumeItem {responsibility 3}
+      \resumeItem {responsibility 4}
+      \resumeItem {responsibility 5}
+      \resumeItem {responsibility n}
+
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+ %--------------------------------------------------Certifications---------------------------------------------
+
 \section{\faBookmark}{Certifications}
+ \resumeEntryStart
+  \resumeEntryTSDL{Red Hat Certified System Engineer (RHCE)}
+  {} 
+  {ID: 190-080-374 - RHEL 7/9}{}
+  \resumeEntryTSDL{Red Hat Certified System Administrator (RHCSA)}
+  {} 
+  {ID: 190-080-374 - RHEL 7}{}
 
-\resumeEntryStart
-  \resumeEntryS{RHCE: }{Red Hat Certified Engineer (RHEL 7/9)}
-  \resumeEntryS{RHCSA: }{Red Hat Certified System Administrator}
-\resumeEntryEnd
+ \resumeEntryEnd
 
-%----------------------------- EDUCATION ----------------------------
+ %-------------------------------------------------- EDUCATION --------------------------------------------------
 \section{\faGraduationCap}{Education}
 
-\resumeEntryStart
-  \resumeEntryTSDL{University of Applied Sciences}{2014 – 2018}{BSc in Applied Sciences (Computer Science)}{}
-\resumeEntryEnd
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {University of Sri Lanka}{2014 -- 2018}
+      {{\textbf{BSc (Special) in Applied Sciences - Computer Science and Technology}}}{Colombo}
+  \resumeEntryEnd
 
-%----------------------------- REFERENCES ---------------------------
+ %-------------------------------------------------- REFERENCES --------------------------------------------------
 \section{\faLink}{References}
 
 \resumeEntryStart
-  \resumeItemListStart
-    \resumeItem{Available upon request.}
-  \resumeItemListEnd
+    \resumeEntryTD{}{}
+    \vspace{-1.5 em}
+    \resumeItemListStart
+      \resumeItem {Available upon request}
+    \resumeItemListEnd
 \resumeEntryEnd
+
+% \begin{table}[H]
+% \centering
+%     \begin{tabularx}{.98\linewidth}{XX}
+%         \textbf{Person 1} & \textbf{Person 2}\\
+%         12 Gray Street & 172 Walpita\\
+%         Carina & Batawala\\
+%          4152 QLD & Padukka \\
+%                 & 10500 LKA\\
+%     \end{tabularx}
+% \end{table}
+
+% For a physical one
+%\textbf{\textit{All information in this resume is true and correct to the best of my knowledge and belief.}}
+
+\vspace{2em}
+%................................................\\
 
 \end{document}
